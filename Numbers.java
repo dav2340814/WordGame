@@ -15,7 +15,7 @@ public class Numbers {
 	}
 
 	public void generateNumber() {
-		randomNum = (int) Math.random() * 100;
+		randomNum = (int) (Math.random() * 100);
 	}
 
 	public Boolean compareNumber(int guess) {
