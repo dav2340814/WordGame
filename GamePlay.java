@@ -1,12 +1,14 @@
-
 import java.util.Scanner;
 
 public class GamePlay {
 
-	private static Person player;
+	private static Players player;
 
 	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
+		Scanner sc = new Scanner(System.console().reader());
+
+		Hosts host = new Hosts("Mettaton");
+		host.randomizeNum();
 
 		System.out.print("What's your first name? ");
 		String fname = sc.next();
@@ -20,30 +22,26 @@ public class GamePlay {
 		if (lnameAns == 'y') {
 			System.out.print("What's your last name? ");
 			String lname = sc.next();
-			player = new Person(fname, lname);
+			player = new Players(fname, lname);
 		} else {
-			player = new Person(fname);
+			player = new Players(fname);
 		}
-
-		Numbers numbers = new Numbers();
-		numbers.generateNumber();
-
-		int guess = -1;
-		do {
-			System.out.printf("%s, Enter a number 0-100: ",
-					lnameAns == 'y' ? player.getFirstName() + " " + player.getLastName()
-							: player.getFirstName());
-			// If the user doesn't input an int,
-			while (!sc.hasNextInt()) {
-				System.out.printf("%s, Enter a number 0-100: ",
-						lnameAns == 'y' ? player.getFirstName() + " " + player.getLastName()
-								: player.getFirstName());
-				// Throw away input until he does
-				sc.next();
+		char continueAns;
+		while (true) {
+			Turn turn = new Turn();
+			while (!turn.takeTurn(player, host)) {
+				continue;
 			}
-			guess = sc.nextInt();
-		} while (!numbers.compareNumber(guess));
-
+			do {
+				System.out.printf("%s: Do you want to quit (y/n)? ",
+						host.getFirstName() + host.getLastName());
+				continueAns = sc.next().strip().charAt(0);
+			} while (continueAns != 'y' && continueAns != 'n');
+			if (continueAns == 'y') {
+				break;
+			}
+			host.randomizeNum();
+		}
 		sc.close();
 	}
 }

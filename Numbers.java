@@ -2,7 +2,7 @@ import java.lang.Math;
 
 public class Numbers {
 
-	private int randomNum;
+	private static int randomNum;
 
 	// Getter and Setter for randomNum
 	public int getRandomNum() {

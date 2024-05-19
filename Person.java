@@ -9,7 +9,7 @@ public class Person {
 
 	public Person(String fname, String lname) {
 		firstName = fname;
-		lastName = lname;
+		lastName = " " + lname;
 	}
 
 	// Getter and Setter for firstName
