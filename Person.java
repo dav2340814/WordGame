@@ -1,15 +1,15 @@
 public class Person {
 	private String firstName;
-	private String lastName;
+	private String lastName = "";
 
 	public Person(String fname) {
 		firstName = fname;
-		lastName = "";
 	}
 
 	public Person(String fname, String lname) {
 		firstName = fname;
-		lastName = " " + lname;
+		if (!lname.isEmpty())
+			lastName = " " + lname;
 	}
 
 	// Getter and Setter for firstName

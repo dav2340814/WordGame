@@ -4,7 +4,6 @@ public class Turn {
 
 	public boolean takeTurn(Players player, Hosts host) {
 		Scanner sc = new Scanner(System.console().reader());
-		// sc.useDelimiter(System.lineSeparator());
 		int guess = -1;
 		System.out.printf("%s: %s, Enter a number 0-100: ", host.getFirstName() + host.getLastName(),
 				player.getFirstName() + player.getLastName());
@@ -21,15 +20,16 @@ public class Turn {
 		// Consume newline
 		sc.nextLine();
 		sc.close();
-		if (host.getNumber().compareNumber(guess)) {
-			player.increaseMoney();
-			System.out.printf("%s: We have a winner!\n%s\n", host.getFirstName() + host.getLastName(),
-					player.toString());
-			return true;
+		Award a;
+		if (Math.round(Math.random()) == 0) {
+			// Money
+			a = new Money();
 		} else {
-			player.decreaseMoney();
-			System.out.println(player.toString());
-			return false;
+			// Physical prize
+			a = new Physical();
 		}
+		boolean isGuessCorrect = host.getNumber().compareNumber(guess);
+		player.setMoney(player.getMoney() + a.displayWinnings(player, isGuessCorrect));
+		return isGuessCorrect;
 	}
 }

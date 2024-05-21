@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class GamePlay {
 
-	private static Players player;
+	private static Players[] currentPlayers = new Players[3];
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.console().reader());
@@ -10,27 +10,28 @@ public class GamePlay {
 		Hosts host = new Hosts("Mettaton");
 		host.randomizeNum();
 
-		System.out.print("What's your first name? ");
-		String fname = sc.next();
+		for (int i = 0; i < 3; i++) {
 
-		char lnameAns;
-		do {
-			System.out.print("Do you want to enter your last name? (y/n) ");
-			lnameAns = sc.next().strip().charAt(0);
-		} while (lnameAns != 'y' && lnameAns != 'n');
-
-		if (lnameAns == 'y') {
-			System.out.print("What's your last name? ");
-			String lname = sc.next();
-			player = new Players(fname, lname);
-		} else {
-			player = new Players(fname);
+			System.out.printf("%s: Player %d, What's your first name? ",
+					host.getFirstName() + host.getLastName(), i + 1);
+			String fname = sc.nextLine();
+			System.out.print("What's your last name (leave empty if you want)? ");
+			String lname = sc.nextLine().strip();
+			currentPlayers[i] = new Players(fname, lname);
 		}
+
 		char continueAns;
+		// Game loop
 		while (true) {
-			Turn turn = new Turn();
-			while (!turn.takeTurn(player, host)) {
-				continue;
+			// Player loop
+			playerloop: while (true) {
+				for (Players p : currentPlayers) {
+
+					Turn turn = new Turn();
+					if (turn.takeTurn(p, host)) {
+						break playerloop;
+					}
+				}
 			}
 			do {
 				System.out.printf("%s: Do you want to quit (y/n)? ",
