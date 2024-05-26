@@ -4,19 +4,10 @@ public class Turn {
 
 	public boolean takeTurn(Players player, Hosts host) {
 		Scanner sc = new Scanner(System.console().reader());
-		int guess = -1;
-		System.out.printf("%s: %s, Enter a number 0-100: ", host.getFirstName() + host.getLastName(),
+		String guess = "";
+		System.out.printf("%s: %s, Enter a letter: ", host.getFirstName() + host.getLastName(),
 				player.getFirstName() + player.getLastName());
-		// If the user doesn't input an int,
-		while (!sc.hasNextInt()) {
-			System.out.printf("%s: %s, Enter a number 0-100: ", host.getFirstName() + host.getLastName(),
-					player.getFirstName() + player.getLastName());
-			// Throw away input until he does
-			if (sc.hasNextLine()) {
-				sc.nextLine();
-			}
-		}
-		guess = sc.nextInt();
+		guess += sc.next().strip().charAt(0);
 		// Consume newline
 		sc.nextLine();
 		sc.close();
@@ -28,8 +19,16 @@ public class Turn {
 			// Physical prize
 			a = new Physical();
 		}
-		boolean isGuessCorrect = host.getNumber().compareNumber(guess);
-		player.setMoney(player.getMoney() + a.displayWinnings(player, isGuessCorrect));
+		boolean isGuessCorrect = false;
+		try {
+			isGuessCorrect = host.getPhrase().findLetters(guess);
+			player.setMoney(player.getMoney() + a.displayWinnings(player, isGuessCorrect));
+			isGuessCorrect = host.getPhrase().hasWon();
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		System.out.println("Phrase: " + host.getPhrase().getPlayingPhrase());
 		return isGuessCorrect;
 	}
 }

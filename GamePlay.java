@@ -8,7 +8,7 @@ public class GamePlay {
 		Scanner sc = new Scanner(System.console().reader());
 
 		Hosts host = new Hosts("Mettaton");
-		host.randomizeNum();
+		host.randomizePhrase();
 
 		for (int i = 0; i < 3; i++) {
 
@@ -41,7 +41,7 @@ public class GamePlay {
 			if (continueAns == 'y') {
 				break;
 			}
-			host.randomizeNum();
+			host.randomizePhrase();
 		}
 		sc.close();
 	}
