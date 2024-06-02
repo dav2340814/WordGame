@@ -1,16 +1,9 @@
-import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 public class Turn {
 
 	public boolean takeTurn(Players player, Hosts host) {
-		Scanner sc = new Scanner(System.console().reader());
-		String guess = "";
-		System.out.printf("%s: %s, Enter a letter: ", host.getFirstName() + host.getLastName(),
-				player.getFirstName() + player.getLastName());
-		guess += sc.next().strip().charAt(0);
-		// Consume newline
-		sc.nextLine();
-		sc.close();
+		String guess = "" + JOptionPane.showInputDialog("Enter a letter:").strip().charAt(0);
 		Award a;
 		if (Math.round(Math.random()) == 0) {
 			// Money
@@ -28,7 +21,6 @@ public class Turn {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		System.out.println("Phrase: " + host.getPhrase().getPlayingPhrase());
 		return isGuessCorrect;
 	}
 }

@@ -1,3 +1,6 @@
+import javax.swing.FocusManager;
+import javax.swing.JOptionPane;
+
 public class Physical implements Award {
 
 	private String[] prizes = { "goat", "car", "house", "vacation", "bike" };
@@ -8,11 +11,13 @@ public class Physical implements Award {
 
 	public int displayWinnings(Players player, boolean isGuessCorrect) {
 		if (isGuessCorrect) {
-			System.out.printf("We have a winner!\n%s\n", player.toString());
-			System.out.printf("Your prize is a %s!\n", prizes[getRandomPrize()]);
+			JOptionPane.showMessageDialog(FocusManager.getCurrentManager().getActiveWindow().getOwner(),
+					String.format("We have a winner!\n%s\n" + "Your prize is a %s!\n",
+							player.toString(), prizes[getRandomPrize()]));
 		} else {
-			System.out.printf("WRONG! %s\n", player.toString());
-			System.out.printf("You could have won a %s\n", prizes[getRandomPrize()]);
+			JOptionPane.showMessageDialog(FocusManager.getCurrentManager().getActiveWindow().getOwner(),
+					String.format("WRONG! %s\n" + "You could have won a %s\n",
+							player.toString(), prizes[getRandomPrize()]));
 		}
 		return 0;
 	}
