@@ -10,10 +10,10 @@ public class GamePlay {
 
 	private static Turn turn = new Turn();
 
-	public static boolean nextTurn() {
+	public static boolean nextTurn(Messages msgArea) {
 		if (currPlayer >= currentPlayers.size())
 			currPlayer = 0;
-		if (turn.takeTurn(currentPlayers.get(currPlayer), host)) {
+		if (turn.takeTurn(currentPlayers.get(currPlayer), host, msgArea)) {
 			currPlayer++;
 			return true;
 		}

@@ -2,7 +2,7 @@ import javax.swing.JOptionPane;
 
 public class Turn {
 
-	public boolean takeTurn(Players player, Hosts host) {
+	public boolean takeTurn(Players player, Hosts host, Messages msgArea) {
 		String guess = "" + JOptionPane.showInputDialog("Enter a letter:").strip().charAt(0);
 		Award a;
 		if (Math.round(Math.random()) == 0) {
@@ -15,7 +15,7 @@ public class Turn {
 		boolean isGuessCorrect = false;
 		try {
 			isGuessCorrect = host.getPhrase().findLetters(guess);
-			player.setMoney(player.getMoney() + a.displayWinnings(player, isGuessCorrect));
+			player.setMoney(player.getMoney() + a.displayWinnings(player, isGuessCorrect, msgArea));
 			isGuessCorrect = host.getPhrase().hasWon();
 
 		} catch (Exception e) {
