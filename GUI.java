@@ -31,14 +31,11 @@ public class GUI {
 			public void actionPerformed(ActionEvent e) {
 				GamePlay.currentPlayers
 						.add(new Players(JOptionPane.showInputDialog("New Player Name: ")));
-				if (!GamePlay.currentPlayers.isEmpty()) {
-					String oldPlayers = playersLabel.getText();
-					playersLabel.setText(
-							oldPlayers + GamePlay.currentPlayers.getLast().getFirstName()
-									+ GamePlay.currentPlayers.getLast()
-											.getLastName()
-									+ ", ");
-				}
+				String oldPlayers = playersLabel.getText();
+				playersLabel.setText(
+						oldPlayers + GamePlay.currentPlayers.getLast().getFirstName()
+								+ GamePlay.currentPlayers.getLast().getLastName()
+								+ ", ");
 				frame.pack();
 
 			}
