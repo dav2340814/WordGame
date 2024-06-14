@@ -8,7 +8,6 @@ public class Money implements Award {
 			msgArea.setMessage(String.format("We have a winner!\n%s\n", player.toString()));
 			return winMoney;
 		} else {
-			System.out.printf("WRONG! %s\n", player.toString());
 			msgArea.setMessage(String.format("WRONG! %s\n", player.toString()));
 			return loseMoney;
 		}

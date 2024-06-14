@@ -12,7 +12,7 @@ public class GUI {
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
 		Container pane = frame.getContentPane();
-		pane.setLayout(new GridLayout());
+		pane.setLayout(new BoxLayout(pane, BoxLayout.PAGE_AXIS));
 
 		JMenuBar menuBar = new JMenuBar();
 		JMenu gameMenu = new JMenu("Game");
@@ -91,6 +91,7 @@ public class GUI {
 							.setPhrase(JOptionPane.showInputDialog("New Phrase: "));
 					GamePlay.host.getPhrase().generatePhrase();
 				}
+				frame.pack();
 			}
 		});
 
@@ -98,6 +99,8 @@ public class GUI {
 				ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		pane.add(msgPane);
+
+		pane.add(msgArea.imgPanel);
 
 		JMenu aboutMenu = new JMenu("About");
 		aboutMenu.setMnemonic('a');
@@ -109,8 +112,19 @@ public class GUI {
 		layoutMenuItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				msgArea.setMessage("I chose GridLayout because it's adaptive and has sane defaults.");
+				msgArea.setMessage(
+						"I chose BoxLayout because it formats everything nicely and needs minimal configuration.");
 				frame.pack();
+			}
+		});
+
+		JMenuItem attributionMenuItem = new JMenuItem("Attribution");
+		aboutMenu.add(attributionMenuItem);
+
+		attributionMenuItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				msgArea.setMessage("All images are taken from unsplash.");
 			}
 		});
 
