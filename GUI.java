@@ -124,7 +124,8 @@ public class GUI {
 		attributionMenuItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				msgArea.setMessage("All images are taken from unsplash.");
+				msgArea.setMessage(
+						"All images are taken from unsplash, all sounds are copyright-free from youtube.");
 			}
 		});
 
